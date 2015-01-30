@@ -7,6 +7,19 @@
 
 var Thing = require('../api/thing/thing.model');
 var User = require('../api/user/user.model');
+var Workentry = require('../api/workentry/workentry.model');
+
+/*Workentry.find({}).remove(function() {
+  Workentry.create({
+    date : new Date(),
+    hours : 2,
+    desc: "Initial project setup"
+  }, {
+    date : new Date(),
+    hours : 3,
+    desc: "Setup Workentry endpoint and angluar resource, ctrl, view"
+  });
+});*/
 
 Thing.find({}).remove(function() {
   Thing.create({

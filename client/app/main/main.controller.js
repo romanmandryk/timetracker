@@ -1,22 +1,35 @@
 'use strict';
 
 angular.module('tttimeApp')
-  .controller('MainCtrl', function ($scope, $http) {
-    $scope.awesomeThings = [];
+  .controller('MainCtrl', function ($scope, Auth, workentry) {
+    $scope.workEntries = [];
+    $scope.newEntry = {};
+    $scope.isLoggedIn = Auth.isLoggedIn;
 
-    $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
+    workentry.query(function(workEntries) {
+      $scope.workEntries = workEntries;
     });
 
-    $scope.addThing = function() {
-      if($scope.newThing === '') {
+    $scope.addEntry = function() {
+      if(!$scope.newEntry || !$scope.newEntry.date) {
         return;
       }
-      $http.post('/api/things', { name: $scope.newThing });
-      $scope.newThing = '';
+
+      workentry.save($scope.newEntry, function(updatedEntry){
+        $scope.workEntries.push(updatedEntry);
+      });
+      $scope.newEntry = {};
     };
 
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
+    $scope.deleteEntry = function(entry) {
+      workentry.delete(entry);
+    };
+
+    $scope.updateEntry = function(entry) {
+      workentry.save(entry);
+    };
+
+    $scope.switchMode = function() {
+      workentry.editMode = !workentry.editMode;
     };
   });
