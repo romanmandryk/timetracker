@@ -3,7 +3,7 @@
 angular.module('tttimeApp')
   .controller('SettingsCtrl', function ($scope, User, Auth) {
     $scope.errors = {};
-
+    $scope.currentUser = Auth.getCurrentUser();
     $scope.changePassword = function(form) {
       $scope.submitted = true;
       if(form.$valid) {
@@ -18,4 +18,10 @@ angular.module('tttimeApp')
         });
       }
 		};
+
+    $scope.saveUserSettings = function(){
+      User.save($scope.currentUser);
+      //todo flash confirmation
+    }
+
   });

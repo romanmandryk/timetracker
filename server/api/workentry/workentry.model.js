@@ -7,7 +7,8 @@ var WorkentrySchema = new Schema({
   date: Date,
   hours: Number,
   desc: String,
-  active: Boolean
+  active: Boolean,
+  user : {type: Schema.ObjectId, ref:'User'}
 });
 
 module.exports = mongoose.model('Workentry', WorkentrySchema);

@@ -2,10 +2,10 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-12 col-md-4 col-md-offset-4">
       <h1>Change Password</h1>
     </div>
-    <div class="col-sm-12">
+    <div class="col-sm-12 col-md-4 col-md-offset-4">
       <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
 
         <div class="form-group">
@@ -33,6 +33,28 @@
         <p class="help-block"> {{ message }} </p>
 
         <button class="btn btn-lg btn-primary" type="submit">Save changes</button>
+      </form>
+    </div>
+  </div>
+  <div class="row"></div>
+  <div class="row">
+    <div class="col-sm-12 col-md-4 col-md-offset-4">
+      <h1>User Settings</h1>
+    </div>
+    <div class="col-sm-12 col-md-4 col-md-offset-4">
+      <form class="form" name="form" ng-submit="saveUserSettings()" novalidate>
+
+        <div class="form-group">
+          <label>Preferred working hours per day</label>
+          <input type="number" name="prefHours" class="form-control" ng-model="currentUser.settings.preferredWorkingHoursPerDay"
+                 mongoose-error/>
+          <p class="help-block" ng-show="form.password.$error.mongoose">
+            {{ errors.other }}
+          </p>
+        </div>
+        <p class="help-block"> {{ message }} </p>
+
+        <button class="btn btn-lg btn-primary" type="submit">Save Settings</button>
       </form>
     </div>
   </div>

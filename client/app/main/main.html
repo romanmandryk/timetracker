@@ -7,22 +7,92 @@
 </header>
 
 <div class="container">
-  <div class="row">
-    <div class="col-lg-12">
+  <div class="row" ng-show="!isLoggedIn()">
+    <h2>Please log in to use ttTime app</h2>
+  </div>
+  <div class="row" ng-show="isLoggedIn()">
+    <div class="col-sm-12 col-md-8 col-md-offset-2">
       <h1 class="page-header">Add new entry</h1>
-      <div class="we-new">
-        <span class="we-new-date"><input type="date" ng-model="newEntry.date"/></span> |
-        <span class="we-new-hours"><input type="number" ng-model="newEntry.hours"/></span> |
-        <span class="we-new-desc"><input type="text" ng-model="newEntry.desc"/></span> |
-        <button ng-click="addEntry()">ADD</button>
+      <div class='col-md-4'>
+        <div class="form-group">
+          Date:
+          <div class="input-group ">
+             <input type="text" class="form-control" datepicker-popup="dd MMM yyyy" ng-model="newEntry.date" is-open="newEntry.datePickerOpened" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="openDatePicker($event, newEntry)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+          </div>
+        </div>
       </div>
+      <div class='col-md-4'>
+        <div class="form-group">
+          Hours:
+          <div class="input-group">
+            <input class="form-control" type="number" ng-model="newEntry.hours"/>
+          </div>
+        </div>
+      </div>
+      <div class='col-md-10'>
+        <div class="form-group">
+          Description:
+          <div class="">
+            <input class="form-control" type="text" ng-model="newEntry.desc"/>
+          </div>
+        </div>
+      </div>
+      <div class='col-md-2'>
+        <div class="form-group">
+          &nbsp;
+          <div class="input-group ">
+            <button class="btn btn-primary" ng-click="addEntry()">ADD</button>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix"></div>
       <h1 class="page-header">Work Entries:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="entry in workEntries">
-        <li>
-          <a href="#" ng-click="switchMode" tooltip="{{entry._id}}">{{entry._id.substr(0,6)}}</a> |
-          <span class="we-date">{{entry.date}}</span> |
-          <span class="we-hours">{{entry.hours}}</span> |
-          <span class="we-desc">{{entry.desc}}</span> |
+
+      <ul class="list-group">
+        <li class="list-group-item single-entry" ng-repeat="entry in workEntries">
+
+          <span ng-if="!entry.editMode">
+            <strong>{{entry.date | date:'dd MMM yyyy'}}</strong> - {{entry.hours}} hours<br>
+            <span class="text-muted">{{entry.desc}}</span>
+          </span>
+
+          <span ng-if="entry.editMode" class="edit-mode" ng-class="{'animate-edit-mode':entry.editMode }">
+            <div class='col-md-4'>
+              <div class="form-group">
+                Date:
+                <div class="input-group ">
+                  <input type="text" class="form-control" datepicker-popup="dd MMM yyyy" ng-model="entry.date" is-open="entry.datePickerOpened" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="openDatePicker($event, entry)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+                </div>
+              </div>
+            </div>
+            <div class='col-md-4'>
+              <div class="form-group">
+                Hours:
+                <div class="input-group">
+                  <input class="form-control" type="number" ng-model="entry.hours"/>
+                </div>
+              </div>
+            </div>
+            <div class='col-md-8'>
+              <div class="form-group">
+                Description:
+                <div class="">
+                  <input class="form-control" type="text" ng-model="entry.desc"/>
+                </div>
+              </div>
+            </div>
+          </span>
+
+          <a ng-click="updateEntry(entry);" ng-if="entry.editMode" class="positive-green"><span class="glyphicon glyphicon-ok pull-right entry-action" ></span></a>
+          <a ng-click="revertChanges(entry);" ng-if="entry.editMode"><span class="glyphicon glyphicon-chevron-left pull-right entry-action"></span></a>
+          <a ng-click="deleteEntry(entry);" ng-if="!entry.editMode" class="trash"><span class="glyphicon glyphicon-trash pull-right entry-action"></span></a>
+          <a ng-click="switchToEdit(entry)" tooltip="{{entry._id}}" ng-if="!entry.editMode"><span class="glyphicon glyphicon-edit pull-right entry-action"></span></a>
 
         </li>
       </ul>

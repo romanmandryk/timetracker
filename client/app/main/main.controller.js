@@ -5,16 +5,24 @@ angular.module('tttimeApp')
     $scope.workEntries = [];
     $scope.newEntry = {};
     $scope.isLoggedIn = Auth.isLoggedIn;
+    $scope.datePickerOpened = false;
 
-    workentry.query(function(workEntries) {
-      $scope.workEntries = workEntries;
-    });
+    $scope.reloadEntries = function(){
+      function cb(loggedIn){
+        if (loggedIn){
+          workentry.query(function(workEntries) {
+            $scope.workEntries = workEntries;
+          });
+        }
+      }
+      Auth.isLoggedInAsync(cb);
+    };
+    $scope.reloadEntries();
 
     $scope.addEntry = function() {
       if(!$scope.newEntry || !$scope.newEntry.date) {
         return;
       }
-
       workentry.save($scope.newEntry, function(updatedEntry){
         $scope.workEntries.push(updatedEntry);
       });
@@ -22,14 +30,34 @@ angular.module('tttimeApp')
     };
 
     $scope.deleteEntry = function(entry) {
-      workentry.delete(entry);
+      var i = $scope.workEntries.indexOf(entry);
+      if (i > -1) $scope.workEntries.splice(i,1);
+      entry.$remove();
     };
 
     $scope.updateEntry = function(entry) {
-      workentry.save(entry);
+      delete entry._backup;
+      entry.$save();
+      entry.editMode = false;
     };
 
-    $scope.switchMode = function() {
-      workentry.editMode = !workentry.editMode;
+    $scope.switchToEdit = function(entry) {
+      angular.copy(entry, entry._backup = {});
+      entry.editMode = true;
     };
+
+    $scope.revertChanges = function(entry) {
+      angular.copy(entry._backup, entry);
+      delete entry._backup;
+      entry.editMode = false;
+    };
+
+    $scope.openDatePicker = function($event, entry) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      entry.datePickerOpened = true;
+    };
+
+
+
   });

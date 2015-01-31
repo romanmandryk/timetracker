@@ -18,7 +18,9 @@ var UserSchema = new Schema({
   facebook: {},
   google: {},
   github: {},
-  preferredWorkingHoursPerDay:Number
+  settings: {
+    preferredWorkingHoursPerDay:{type:Number, default:8}
+  }
 });
 
 /**

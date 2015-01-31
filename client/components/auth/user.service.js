@@ -17,6 +17,13 @@ angular.module('tttimeApp')
         params: {
           id:'me'
         }
+      },
+      save: {
+        method: 'PUT',
+        params: {
+          id:'me',
+          controller:'save'
+        }
       }
 	  });
   });

@@ -28,3 +28,26 @@
     margin-top: 70px;
     border-top: 1px solid #E5E5E5;
 }
+
+.entry-action{
+  font-size:20px;
+  margin:-10px 5px 0px 5px;
+
+}
+
+.trash { color:rgb(209, 91, 71); }
+.positive-green{color: #00A000}
+.single-entry{
+  overflow:auto;
+}
+
+.edit-mode{
+  opacity:0;
+  -webkit-transition: opacity 0.5s ;
+  -moz-transition: opacity 0.5s ;
+  transition: opacity 0.5s ;
+}
+
+.animate-edit-mode {
+  opacity:1;
+}
