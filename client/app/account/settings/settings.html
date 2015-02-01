@@ -46,7 +46,7 @@
         <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
         <div class="form-group">
           <label>Preferred working hours per day</label>
-          <input type="number" name="prefHours" class="form-control" ng-model="currentUser.settings.preferredWorkingHoursPerDay"
+          <input type="number" name="prefHours" class="form-control" ng-model="currentUser.settings.preferredWorkingHoursPerDay" min="0" max="24"
                  mongoose-error/>
         </div>
 

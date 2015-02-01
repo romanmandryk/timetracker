@@ -18,7 +18,7 @@ angular.module('tttimeApp')
           id:'me'
         }
       },
-      save: {
+      update: {
         method: 'PUT',
         params: {
           id:'me',

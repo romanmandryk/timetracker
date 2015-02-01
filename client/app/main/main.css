@@ -45,11 +45,11 @@
 }
 
 
-.single-entry{
-  overflow:auto;
+.single-entry.edit-mode{
+  min-height: 150px;
 }
 
-.edit-mode{
+.start-edit-mode{
   opacity:0;
   -webkit-transition: opacity 0.5s ;
   -moz-transition: opacity 0.5s ;

@@ -21,7 +21,7 @@ angular.module('tttimeApp')
 		};
 
     $scope.saveUserSettings = function(){
-      User.save($scope.currentUser, function(){
+      User.update($scope.currentUser, function(){
         $scope.addAlert({ type: 'success', msg: 'User settings successfully saved'});
       },function(){
         $scope.addAlert({ type: 'danger', msg: 'Error saving user settings'});

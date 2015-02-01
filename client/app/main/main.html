@@ -13,6 +13,7 @@
   <div class="row" ng-show="isLoggedIn()">
     <div class="col-sm-12 col-md-8 col-md-offset-2">
       <h1 class="page-header">Add new entry</h1>
+      <form name="newEntryForm" ng-submit="addEntry(newEntryForm)">
       <div class='col-md-4'>
         <div class="form-group">
           Date:
@@ -28,7 +29,7 @@
         <div class="form-group">
           Hours:
           <div class="input-group">
-            <input class="form-control" type="number" ng-model="newEntry.hours"/>
+            <input class="form-control" type="number" ng-model="newEntry.hours" ng-required="true" min="0" max="24"/>
           </div>
         </div>
       </div>
@@ -36,7 +37,7 @@
         <div class="form-group">
           Description:
           <div class="">
-            <input class="form-control" type="text" ng-model="newEntry.desc"/>
+            <input class="form-control" type="text" ng-model="newEntry.desc" ng-required="true"/>
           </div>
         </div>
       </div>
@@ -44,22 +45,24 @@
         <div class="form-group">
           &nbsp;
           <div class="input-group ">
-            <button class="btn btn-primary" ng-click="addEntry()">ADD</button>
+            <button class="btn btn-primary" type="submit">ADD</button>
           </div>
         </div>
       </div>
+      </form>
       <div class="row clearfix"></div>
       <h1 class="page-header">Work Entries:</h1>
-
+      <form name="editEntryForm">
+      <alert ng-show="!editEntryForm.$valid" type="danger">Please review your work entry. All fields are required, hours must be in 0-24 range.</alert>
       <ul class="list-group">
-        <li class="list-group-item single-entry" ng-repeat="entry in workEntries | orderBy:'date'" ng-class="entry.colorClass">
+        <li class="list-group-item single-entry {{entry.colorClass}}" ng-repeat="entry in workEntries | orderBy:'date'" ng-class="{'edit-mode':entry.editMode }">
 
           <span ng-if="!entry.editMode">
             <strong>{{entry.date | date:'dd MMM yyyy'}}</strong> - {{entry.hours}} hours<br>
             <span class="text-muted">{{entry.desc}}</span>
           </span>
 
-          <span ng-if="entry.editMode" class="edit-mode" ng-class="{'animate-edit-mode':entry.editMode }">
+          <span ng-if="entry.editMode" class="start-edit-mode" ng-class="{'animate-edit-mode':entry.editMode }">
             <div class='col-md-4'>
               <div class="form-group">
                 Date:
@@ -75,7 +78,7 @@
               <div class="form-group">
                 Hours:
                 <div class="input-group">
-                  <input class="form-control" type="number" ng-model="entry.hours"/>
+                  <input class="form-control" type="number" ng-model="entry.hours" ng-required="true" min="0" max="24"/>
                 </div>
               </div>
             </div>
@@ -83,20 +86,20 @@
               <div class="form-group">
                 Description:
                 <div class="">
-                  <input class="form-control" type="text" ng-model="entry.desc"/>
+                  <input class="form-control" type="text" ng-model="entry.desc" ng-required="true"/>
                 </div>
               </div>
             </div>
           </span>
 
-          <a ng-click="updateEntry(entry);" ng-if="entry.editMode" class="positive-green"><span class="glyphicon glyphicon-ok pull-right entry-action" ></span></a>
+          <a ng-click="updateEntry(entry, editEntryForm);" ng-if="entry.editMode" class="positive-green"><span class="glyphicon glyphicon-ok pull-right entry-action" ></span></a>
           <a ng-click="revertChanges(entry);" ng-if="entry.editMode"><span class="glyphicon glyphicon-chevron-left pull-right entry-action"></span></a>
           <a ng-click="deleteEntry(entry);" ng-if="!entry.editMode" class="trash"><span class="glyphicon glyphicon-trash pull-right entry-action"></span></a>
           <a ng-click="switchToEdit(entry)" tooltip="{{entry._id}}" ng-if="!entry.editMode"><span class="glyphicon glyphicon-edit pull-right entry-action"></span></a>
 
         </li>
       </ul>
-
+      </form>
     </div>
   </div>
 </div>

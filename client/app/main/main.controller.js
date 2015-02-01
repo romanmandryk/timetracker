@@ -48,9 +48,9 @@ angular.module('tttimeApp')
     $scope.reloadEntries();
 
     $scope.addEntry = function() {
-      if(!$scope.newEntry || !$scope.newEntry.date) {
+     /* if(!$scope.newEntry || !$scope.newEntry.date) {
         return;
-      }
+      }*/
       Workentry.save($scope.newEntry, function(updatedEntry){
         $scope.workEntries.push(updatedEntry);
         refreshDateHourMap();
@@ -65,7 +65,8 @@ angular.module('tttimeApp')
       refreshDateHourMap();
     };
 
-    $scope.updateEntry = function(entry) {
+    $scope.updateEntry = function(entry, form) {
+      if (!form.$valid) {return};
       delete entry._backup;
       entry.$save(function(){
         entry.editMode = false;
