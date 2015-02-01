@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Service: workentry', function () {
+describe('Service: Workentry', function () {
 
   // load the service's module
   beforeEach(module('tttimeApp'));

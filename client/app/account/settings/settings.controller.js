@@ -2,6 +2,7 @@
 
 angular.module('tttimeApp')
   .controller('SettingsCtrl', function ($scope, User, Auth) {
+    $scope.alerts = [];
     $scope.errors = {};
     $scope.currentUser = Auth.getCurrentUser();
     $scope.changePassword = function(form) {
@@ -20,8 +21,19 @@ angular.module('tttimeApp')
 		};
 
     $scope.saveUserSettings = function(){
-      User.save($scope.currentUser);
-      //todo flash confirmation
-    }
+      User.save($scope.currentUser, function(){
+        $scope.addAlert({ type: 'success', msg: 'User settings successfully saved'});
+      },function(){
+        $scope.addAlert({ type: 'danger', msg: 'Error saving user settings'});
+      });
+    };
+
+    $scope.addAlert = function(alert) {
+      $scope.alerts.push(alert);
+    };
+
+    $scope.closeAlert = function(index) {
+      $scope.alerts.splice(index, 1);
+    };
 
   });

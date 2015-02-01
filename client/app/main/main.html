@@ -52,7 +52,7 @@
       <h1 class="page-header">Work Entries:</h1>
 
       <ul class="list-group">
-        <li class="list-group-item single-entry" ng-repeat="entry in workEntries">
+        <li class="list-group-item single-entry" ng-repeat="entry in workEntries | orderBy:'date'" ng-class="entry.colorClass">
 
           <span ng-if="!entry.editMode">
             <strong>{{entry.date | date:'dd MMM yyyy'}}</strong> - {{entry.hours}} hours<br>
