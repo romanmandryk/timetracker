@@ -7,6 +7,10 @@ angular.module('tttimeApp')
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.datePickerOpened = false;
     $scope.dateHourMap= {};
+    $scope.filter = {
+      dateFrom:{},
+      dateTo:{}
+    };
 
     function dateToStr(date){
       if (! date){return;}
@@ -88,9 +92,22 @@ angular.module('tttimeApp')
     $scope.openDatePicker = function($event, entry) {
       $event.preventDefault();
       $event.stopPropagation();
-      entry.datePickerOpened = true;
+      if (entry) entry.datePickerOpened = true;
     };
 
+    $scope.getFilteredEntries = function(){
+      return $scope.workEntries.filter(function(entry){
+        if ($scope.filter.dateFrom.date && $scope.filter.dateTo.date){
+          return $scope.filter.dateFrom.date <= entry.date && $scope.filter.dateTo.date >= entry.date;
+        } else if($scope.filter.dateFrom.date){
+          return $scope.filter.dateFrom.date <= entry.date;
+        } else if ($scope.filter.dateTo.date){
+          return $scope.filter.dateTo.date >= entry.date;
+        } else {
+          return true;
+        }
+      });
+    }
 
 
   });
