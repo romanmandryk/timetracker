@@ -5,6 +5,10 @@ angular.module('tttimeApp')
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
+    },
+    {
+      'title': 'Summary',
+      'link': '/summary'
     }];
 
     $scope.isCollapsed = true;

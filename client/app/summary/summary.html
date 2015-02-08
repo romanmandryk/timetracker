@@ -1,0 +1,61 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<header class="hero-unit" id="banner">
+  <div class="container">
+    <h1>ttTime</h1>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row" ng-show="!isLoggedIn()">
+    <h2>Please log in to use ttTime app</h2>
+  </div>
+  <div class="row" ng-show="isLoggedIn()">
+    <div class="col-xs-12 col-sm-3 hidden-print">
+      <h3 class="page-header">Filter Entries</h3>
+      <div class="form-group">
+        From:
+        <div class="input-group ">
+          <input type="text" class="form-control" ng-change="filterEntries()" datepicker-popup="dd MMM yyyy" ng-model="filter.dateFrom.date" is-open="filter.dateFrom.datePickerOpened" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="openDatePicker($event, filter.dateFrom)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+        </div>
+      </div>
+      <div class="form-group">
+        To:
+        <div class="input-group ">
+          <input type="text" class="form-control" ng-change="filterEntries()" datepicker-popup="dd MMM yyyy" ng-model="filter.dateTo.date" is-open="filter.dateTo.datePickerOpened" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="openDatePicker($event, filter.dateTo)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+        </div>
+      </div>
+
+    </div>
+    <div class="row clearfix"></div>
+    <div class="col-xs-12 col-sm-11">
+      <h1 class="page-header">Work Summary</h1>
+
+      <ul class="list-group">
+        <li class="list-group-item single-entry {{entry.colorClass}}" ng-repeat="entry in filteredEntries | orderBy:'date'" ng-class="{'light-green':entry.totalHours >= prefHours, 'light-red':entry.totalHours < prefHours}">
+          <span>
+            <strong>{{entry.date | date:'dd MMM yyyy'}} - {{entry.totalHours}} hours in total</strong><br>
+            <ul class="subEntryList">
+              <li class="subEntry" ng-repeat="subEntry in entry.entries">
+                {{subEntry.hours}} h - {{subEntry.desc}}
+              </li>
+            </ul>
+
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>ttTime | by Roman Mandryk</p>
+  </div>
+</footer>

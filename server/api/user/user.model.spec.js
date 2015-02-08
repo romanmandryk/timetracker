@@ -42,6 +42,16 @@ describe('User Model', function() {
     });
   });
 
+  it('should return settings with deffault values', function(done) {
+    user.save(function(err, newUser) {
+      should.exist(newUser);
+      should.exist(newUser.settings);
+      should.exist(newUser.settings.preferredWorkingHoursPerDay);
+      newUser.settings.preferredWorkingHoursPerDay.should.equal(8);
+      done();
+    });
+  });
+
   it('should fail when saving without an email', function(done) {
     user.email = '';
     user.save(function(err) {

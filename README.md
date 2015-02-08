@@ -4,7 +4,10 @@ ttTime - simple time management app.
 Introduction
 ----
 The app allows users to log in and in their personal space add multiple work entries for days they worked.
-It also helps to track their daily goals in minimum working hours. Preferred daily working hours can be set on Settings page. (Wrench icon)
+It also helps to track their daily goals in minimum working hours. 
+Preferred daily working hours can be set on Settings page. (Wrench icon).
+There is also a summary page which groups work by date and allows filtering.
+
 Other features:
   - Filter work entries by date
   - Printer friendly - prints only what matters

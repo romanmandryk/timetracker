@@ -1,0 +1,11 @@
+.subEntryList .subEntry{
+  list-style-type: disc;
+  list-style-position: outside;
+}
+
+.green{
+  color:darkgreen;
+}
+.red{
+  color:darkred;
+}

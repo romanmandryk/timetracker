@@ -35,7 +35,6 @@ angular.module('tttimeApp')
           ? "light-green"
           : "light-red";
       });
-      window.workEntries = $scope.workEntries;
     }
 
     $scope.reloadEntries = function(){
