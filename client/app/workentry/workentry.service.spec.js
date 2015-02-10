@@ -6,13 +6,22 @@ describe('Service: Workentry', function () {
   beforeEach(module('tttimeApp'));
 
   // instantiate service
-  var workentry;
-  beforeEach(inject(function (_workentry_) {
-    workentry = _workentry_;
+  var Workentry, $httpBackend;
+  beforeEach(inject(function (_Workentry_, _$httpBackend_) {
+    Workentry = _Workentry_;
+    $httpBackend = _$httpBackend_;
   }));
 
-  it('should do something', function () {
-    expect(!!workentry).toBe(true);
+  it('should exist', function () {
+    expect(!!Workentry).toBe(true);
+  });
+
+  it('should query workentries', function () {
+    $httpBackend.expectGET('/api/workentries').respond([{ id: 1, desc: 'note 1' }, { id: 2, desc: 'note2' }]);
+    var result = Workentry.query(function(entries){
+      $httpBackend.flush();
+      expect(entries.length).toBe(2);
+    });
   });
 
 });

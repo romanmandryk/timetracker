@@ -13,7 +13,7 @@ describe('Controller: MainCtrl', function () {
   beforeEach(inject(function (_$httpBackend_, $controller, $rootScope) {
     $httpBackend = _$httpBackend_;
     $httpBackend.expectGET('/api/workentries')
-      .respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
+      .respond([]);
 
     scope = $rootScope.$new();
     MainCtrl = $controller('MainCtrl', {
@@ -21,8 +21,10 @@ describe('Controller: MainCtrl', function () {
     });
   }));
 
-  it('should attach a list of work entries to the scope', function () {
-    $httpBackend.flush();
-    expect(scope.workEntries.length).toBe(2);
-  });
+  it('should display a login message for anonymous user', function () {});
+  it('should attach a list of work entries to the scope', function () {});
+  it('should add new valid entry', function () {});
+  it('should not add invalid entry', function () {});
+
+
 });
