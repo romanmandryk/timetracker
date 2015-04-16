@@ -35,3 +35,6 @@ To run the app:
 
 4) go to project folder and run `grunt serve` (in development mode) or `grunt serve:dist`
 
+Screenshot
+----
+<img src="./screenshot.png"></img>
