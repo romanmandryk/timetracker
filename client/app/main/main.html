@@ -2,13 +2,13 @@
 
 <header class="hero-unit" id="banner">
   <div class="container">
-    <h1>ttTime</h1>
+    <h1>Time Tracker app</h1>
   </div>
 </header>
 
 <div class="container">
   <div class="row" ng-show="!isLoggedIn()">
-    <h2>Please log in to use ttTime app</h2>
+    <h2>Please log in to use Time Tracker app</h2>
   </div>
   <div class="row" ng-show="isLoggedIn()">
     <div class="col-xs-12 col-sm-3 hidden-print">
@@ -51,7 +51,7 @@
         <div class="form-group">
           Hours:
           <div class="input-group">
-            <input class="form-control" type="number" ng-model="newEntry.hours" ng-required="true" min="0" max="24"/>
+            <input class="form-control" type="number" ng-model="newEntry.hours" ng-required="true" min="0" max="24" step="0.5"/>
           </div>
         </div>
       </div>
@@ -102,7 +102,7 @@
               <div class="form-group">
                 Hours:
                 <div class="input-group">
-                  <input class="form-control" type="number" ng-model="entry.hours" ng-required="true" min="0" max="24"/>
+                  <input class="form-control" type="number" ng-model="entry.hours" ng-required="true" min="0" max="24" step="0.5"/>
                 </div>
               </div>
             </div>
@@ -130,6 +130,6 @@
 
 <footer class="footer">
   <div class="container">
-      <p>ttTime | by Roman Mandryk</p>
+      <p>Time Tracker App | by <a href="https://github.com/romanmandryk" target="_blank">Roman Mandryk</a></p>
   </div>
 </footer>

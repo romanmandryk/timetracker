@@ -1,4 +1,4 @@
-ttTime - simple time management app.
+Time Tracker App
 ====
 
 Introduction
@@ -27,10 +27,11 @@ Running the project
 ----
 To run the app:
 
->1. make sure you have installed node.js
->2. run in commandline **npm install -g grunt**
->3. run in commandline **npm install -g bower**
->4. go to project folder and run **grunt serve** (in development mode) or **grunt serve:dist**
+1) make sure you have installed node.js
 
-ttTime app can be accessed online at:
-http://ec2-54-153-156-214.ap-southeast-2.compute.amazonaws.com/
+2) run in commandline `npm install -g grunt bower`
+
+3) in project folder run in `npm install`
+
+4) go to project folder and run `grunt serve` (in development mode) or `grunt serve:dist`
+
