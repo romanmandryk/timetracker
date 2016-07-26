@@ -33,7 +33,9 @@ To run the app:
 
 3) in project folder run in `npm install`
 
-4) go to project folder and run `grunt serve` (in development mode) or `grunt serve:dist`
+4) in project folder and run `bower install`
+
+5) in project folder and run `grunt serve` (in development mode) or `grunt serve:dist`
 
 Screenshot
 ----
