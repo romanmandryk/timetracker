@@ -30,7 +30,7 @@ exports.create = function (req, res, next) {
   newUser.role = 'user';
   newUser.save(function(err, user) {
     if (err) return validationError(res, err);
-    var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresIn: 5h });
+    var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresIn: '5h' });
     res.json({ token: token });
   });
 };
